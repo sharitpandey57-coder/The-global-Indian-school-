@@ -1,0 +1,16 @@
+{
+  "name": "The Global Indian School",
+  "short_name": "GIS School",
+  "start_url": "/The-global-Indian-school/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff1a1a",
+  "icons": [
+    {
+      "src": "launchericon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
