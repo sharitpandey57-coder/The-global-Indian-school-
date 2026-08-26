@@ -1,0 +1,9 @@
+{
+  "name": "The Global Indian School",
+  "short_name": "GIS School",
+  "description": "Official app for school information and updates",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}
