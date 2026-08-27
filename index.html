@@ -185,7 +185,7 @@
 
   <div class="grid-container">
 
-    <div class="card c1" onclick="openModal('Todays Schedule', 'Welcome to Today\'s updates! Classes are running as per normal schedule. Morning assembly starts at 8:00 AM.')">
+    <div class="card c1" onclick="openDynamicModal('todays', 'Todays Schedule', 'Welcome to Today\'s updates! Classes are running as per normal schedule. Morning assembly starts at 8:00 AM.')">
       <div class="card-icon">📅</div>
       <div class="card-title">Todays</div>
     </div>
@@ -200,17 +200,17 @@
       <div class="card-title">Management Message</div>
     </div>
 
-    <div class="card c4" onclick="openModal('Principal Message', 'Dear Parents & Students,<br><br>We focus on value-based education, discipline, and practical learning to bring out the best in every student.')">
+    <div class="card c4" onclick="openDynamicModal('principal message', 'Principal Message', 'Dear Parents & Students,<br><br>We focus on value-based education, discipline, and practical learning to bring out the best in every student.')">
       <div class="card-icon">💬</div>
       <div class="card-title">Principal Message</div>
     </div>
 
-    <div class="card c5" onclick="openModal('School Activities', '📌 Science Exhibition<br>📌 Annual Sports Week<br>📌 Cultural Programs & Competitions')">
+    <div class="card c5" onclick="openDynamicModal('activity', 'School Activities', '📌 Science Exhibition<br>📌 Annual Sports Week<br>📌 Cultural Programs & Competitions')">
       <div class="card-icon">🎯</div>
       <div class="card-title">Activity</div>
     </div>
 
-    <div class="card c6" onclick="openModal('Notice Board', '📌 Upcoming terminal exams start next month.<br>📌 Parent-Teacher Meeting on Saturday.<br>📌 School fees due date: 10th of every month.')">
+    <div class="card c6" onclick="openDynamicModal('notice', 'Notice Board', '📌 Upcoming terminal exams start next month.<br>📌 Parent-Teacher Meeting on Saturday.<br>📌 School fees due date: 10th of every month.')">
       <div class="card-icon">📋</div>
       <div class="card-title">Notice</div>
     </div>
@@ -230,17 +230,17 @@
       <div class="card-title">Student Zone</div>
     </div>
 
-    <div class="card c1" onclick="openModal('Upcoming Events', '🎉 Annual Sports Meet - Coming Soon!<br>🎉 Science Fair 2026<br>🎉 Teachers\' Day Celebration')">
+    <div class="card c1" onclick="openDynamicModal('events', 'Upcoming Events', '🎉 Annual Sports Meet - Coming Soon!<br>🎉 Science Fair 2026<br>🎉 Teachers\' Day Celebration')">
       <div class="card-icon">🎉</div>
       <div class="card-title">Events</div>
     </div>
 
-    <div class="card c2" onclick="openModal('Admission Inquiry', '<b>Admissions Open for New Academic Session!</b><br><br>Classes: Nursery to 12th<br>📞 Contact: +91 9876543210<br>✉ Email: admission@gis.edu.in')">
+    <div class="card c2" onclick="openDynamicModal('admission inquiry', 'Admission Inquiry', '<b>Admissions Open for New Academic Session!</b><br><br>Classes: Nursery to 12th<br>📞 Contact: +91 94275 80414<br>✉ Email: admission@gis.edu.in')">
       <div class="card-icon">📝</div>
       <div class="card-title">Admission Inquiry</div>
     </div>
 
-    <div class="card c3" onclick="openModal('Contact Us', '<b>The Global Indian School</b><br>Surat, Gujarat, India<br><br>📞 Phone: +91 9876543210<br>🌐 Web: sharitpandey57-coder.github.io')">
+    <div class="card c3" onclick="openModal('Contact Us', '<b>The Global Indian School</b><br>Surat, Gujarat, India<br><br>📞 Phone: +91 94275 80414<br>🌐 Web: sharitpandey57-coder.github.io')">
       <div class="card-icon">📞</div>
       <div class="card-title">Contact Us</div>
     </div>
@@ -260,15 +260,35 @@
   </div>
 
   <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbxNPGLhoMHp1ApbHec2CdZeYQ_v89beYEhjNuh26m7resg80PlWMCRIXwiwrJ1anzy4/exec";
+    let liveData = {};
+
+    function fetchSheetData() {
+      fetch(API_URL)
+        .then(res => res.json())
+        .then(data => {
+          liveData = data;
+          console.log("Sheet Data Loaded:", liveData);
+        })
+        .catch(err => console.error("Error fetching live data:", err));
+    }
+
     function openModal(title, content) {
       document.getElementById('modalTitle').innerText = title;
       document.getElementById('modalText').innerHTML = content;
       document.getElementById('customModal').style.display = 'flex';
     }
 
+    function openDynamicModal(categoryKey, defaultTitle, defaultContent) {
+      let content = liveData[categoryKey] ? liveData[categoryKey].replace(/\n/g, "<br>") : defaultContent;
+      openModal(defaultTitle, content);
+    }
+
     function closeModal() {
       document.getElementById('customModal').style.display = 'none';
     }
+
+    window.onload = fetchSheetData;
   </script>
 
 </body>
