@@ -105,6 +105,69 @@
     .c7 { background-color: #d1fae5; }
     .c8 { background-color: #fef3c7; }
     .c9 { background-color: #fae8ff; }
+
+    /* Modal Popup Styling */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      position: relative;
+      animation: popup 0.2s ease-out;
+    }
+
+    @keyframes popup {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #ffcc00;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .modal-header h3 {
+      color: #cc0000;
+      font-size: 18px;
+    }
+
+    .close-btn {
+      background: #ff1a1a;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-body {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
@@ -122,71 +185,89 @@
 
   <div class="grid-container">
 
-    <div class="card c1" onclick="openSection('Today\'s Events & Schedule')">
+    <div class="card c1" onclick="openModal('Todays Schedule', 'Welcome to Today\'s updates! Classes are running as per normal schedule. Morning assembly starts at 8:00 AM.')">
       <div class="card-icon">📅</div>
       <div class="card-title">Todays</div>
     </div>
 
-    <div class="card c2" onclick="openSection('About Our School')">
+    <div class="card c2" onclick="openModal('About Us', 'The Global Indian School, Surat delivers quality education with focus on academic excellence, modern infrastructure, and all-round student development.')">
       <div class="card-icon">👤</div>
       <div class="card-title">About Us</div>
     </div>
 
-    <div class="card c3" onclick="openSection('Management Message')">
+    <div class="card c3" onclick="openModal('Management Message', 'Our mission is to build character, nurture talent, and empower young minds with values and innovation for a bright future.')">
       <div class="card-icon">👔</div>
       <div class="card-title">Management Message</div>
     </div>
 
-    <div class="card c4" onclick="openSection('Principal Message')">
+    <div class="card c4" onclick="openModal('Principal Message', 'Dear Parents & Students,<br><br>We focus on value-based education, discipline, and practical learning to bring out the best in every student.')">
       <div class="card-icon">💬</div>
       <div class="card-title">Principal Message</div>
     </div>
 
-    <div class="card c5" onclick="openSection('School Activities')">
+    <div class="card c5" onclick="openModal('School Activities', '📌 Science Exhibition<br>📌 Annual Sports Week<br>📌 Cultural Programs & Competitions')">
       <div class="card-icon">🎯</div>
       <div class="card-title">Activity</div>
     </div>
 
-    <div class="card c6" onclick="openSection('Notice Board')">
+    <div class="card c6" onclick="openModal('Notice Board', '📌 Upcoming terminal exams start next month.<br>📌 Parent-Teacher Meeting on Saturday.<br>📌 School fees due date: 10th of every month.')">
       <div class="card-icon">📋</div>
       <div class="card-title">Notice</div>
     </div>
 
-    <div class="card c7" onclick="openSection('School Facilities')">
+    <div class="card c7" onclick="openModal('School Facilities', '✔ Digital Smart Classrooms<br>✔ Fully Equipped Science & Computer Labs<br>✔ Sports Complex & Playground<br>✔ Safe Bus Transport Facility')">
       <div class="card-icon">🏫</div>
       <div class="card-title">Facility</div>
     </div>
 
-    <div class="card c8" onclick="openSection('Photo Gallery')">
+    <div class="card c8" onclick="openModal('Photo Gallery', 'Campus photos, Sports Day highlights, and Annual Day events gallery will be updated here!')">
       <div class="card-icon">🖼️</div>
       <div class="card-title">Gallery</div>
     </div>
 
-    <div class="card c9" onclick="openSection('Student Zone Portal')">
+    <div class="card c9" onclick="openModal('Student Zone', 'Access homework, exam timetable, syllabus, and study material directly from this section.')">
       <div class="card-icon">🎓</div>
       <div class="card-title">Student Zone</div>
     </div>
 
-    <div class="card c1" onclick="openSection('Upcoming Events')">
+    <div class="card c1" onclick="openModal('Upcoming Events', '🎉 Annual Sports Meet - Coming Soon!<br>🎉 Science Fair 2026<br>🎉 Teachers\' Day Celebration')">
       <div class="card-icon">🎉</div>
       <div class="card-title">Events</div>
     </div>
 
-    <div class="card c2" onclick="openSection('Admission Inquiry Form')">
+    <div class="card c2" onclick="openModal('Admission Inquiry', '<b>Admissions Open for New Academic Session!</b><br><br>Classes: Nursery to 12th<br>📞 Contact: +91 9876543210<br>✉ Email: admission@gis.edu.in')">
       <div class="card-icon">📝</div>
       <div class="card-title">Admission Inquiry</div>
     </div>
 
-    <div class="card c3" onclick="openSection('Contact Us Details')">
+    <div class="card c3" onclick="openModal('Contact Us', '<b>The Global Indian School</b><br>Surat, Gujarat, India<br><br>📞 Phone: +91 9876543210<br>🌐 Web: sharitpandey57-coder.github.io')">
       <div class="card-icon">📞</div>
       <div class="card-title">Contact Us</div>
     </div>
 
   </div>
 
+  <div class="modal-overlay" id="customModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Title</h3>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalText">
+        Content...
+      </div>
+    </div>
+  </div>
+
   <script>
-    function openSection(title) {
-      alert("Welcome to " + title + "\n\nThis section is coming soon!");
+    function openModal(title, content) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalText').innerHTML = content;
+      document.getElementById('customModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('customModal').style.display = 'none';
     }
   </script>
 
