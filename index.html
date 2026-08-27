@@ -1,295 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Global Indian School</title>
-  <link rel="manifest" href="manifest.json">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Global Indian School</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f5f7;
+            padding-bottom: 30px;
+        }
+        .top-bar {
+            background: linear-gradient(90deg, #ff1a1a, #cc0000);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .admin-btn-top {
+            background: #fff;
+            color: #cc0000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .banner-container {
+            padding: 15px;
+        }
+        .banner-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 3px solid #ffcc00;
+            text-align: center;
+        }
+        .banner-card img {
+            width: 100%;
+            display: block;
+        }
+        .notice-board {
+            margin: 0 15px 15px 15px;
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 12px;
+            border-radius: 10px;
+            color: #856404;
+        }
+        .notice-board h4 {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0 15px;
+        }
+        .card {
+            background: white;
+            border-radius: 13px;
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: #333;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .card:active {
+            transform: scale(0.95);
+        }
+        .card-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .card-title {
+            font-size: 12px;
+            font-weight: bold;
+        }
 
-    body {
-      background-color: #f5f5f7;
-      padding-bottom: 20px;
-    }
-
-    /* Top Red Bar */
-    .top-bar {
-      background: linear-gradient(90deg, #ff1a1a, #cc0000);
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: bold;
-      font-size: 18px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    /* Top Banner */
-    .banner-container {
-      padding: 15px;
-    }
-    .banner-card {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      border: 3px solid #ffcc00;
-      text-align: center;
-    }
-    .banner-card img {
-      width: 100%;
-      display: block;
-    }
-
-    /* Dashboard Grid */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      padding: 0 15px;
-    }
-
-    /* Dashboard Cards */
-    .card {
-      border-radius: 15px;
-      padding: 15px 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-      text-decoration: none;
-      color: #333;
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
-
-    .card:active {
-      transform: scale(0.95);
-    }
-
-    .card-icon {
-      background: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      margin-bottom: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .card-title {
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.2;
-    }
-
-    /* Light Theme Background Colors */
-    .c1 { background-color: #ffe4e6; }
-    .c2 { background-color: #ffedd5; }
-    .c3 { background-color: #dcfce7; }
-    .c4 { background-color: #e0f2fe; }
-    .c5 { background-color: #fee2e2; }
-    .c6 { background-color: #e0e7ff; }
-    .c7 { background-color: #d1fae5; }
-    .c8 { background-color: #fef3c7; }
-    .c9 { background-color: #fae8ff; }
-
-    /* Modal Popup Styling */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 15px;
-      max-width: 400px;
-      width: 100%;
-      padding: 20px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      position: relative;
-      animation: popup 0.2s ease-out;
-    }
-
-    @keyframes popup {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #ffcc00;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-    }
-
-    .modal-header h3 {
-      color: #cc0000;
-      font-size: 18px;
-    }
-
-    .close-btn {
-      background: #ff1a1a;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      font-size: 16px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .modal-body {
-      font-size: 14px;
-      color: #444;
-      line-height: 1.5;
-    }
-  </style>
+        /* Modal / Popup Admin Panel */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .modal-content h3 {
+            color: #cc0000;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .modal-buttons button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-save { background: #28a745; color: white; }
+        .btn-close { background: #6c757d; color: white; }
+    </style>
 </head>
 <body>
 
-  <div class="top-bar">
-    <div>☰ THE GLOBAL INDIAN SCHOOL</div>
-    <div>🔔 ⚙️</div>
-  </div>
-
-  <div class="banner-container">
-    <div class="banner-card">
-      <img src="launchericon-512x512.png" alt="School Banner">
-    </div>
-  </div>
-
-  <div class="grid-container">
-
-    <div class="card c1" onclick="openDynamicModal('todays', 'Todays Schedule', 'Welcome to Today\'s updates! Classes are running as per normal schedule. Morning assembly starts at 8:00 AM.')">
-      <div class="card-icon">📅</div>
-      <div class="card-title">Todays</div>
+    <div class="top-bar">
+        <span>THE GLOBAL INDIAN SCHOOL</span>
+        <button class="admin-btn-top" onclick="openAdminModal()">Admin Login</button>
     </div>
 
-    <div class="card c2" onclick="openModal('About Us', 'The Global Indian School, Surat delivers quality education with focus on academic excellence, modern infrastructure, and all-round student development.')">
-      <div class="card-icon">👤</div>
-      <div class="card-title">About Us</div>
+    <div class="banner-container">
+        <div class="banner-card">
+            <img src="https://via.placeholder.com/600x300.png?text=The+Global+Indian+School+Surat" alt="School Banner">
+        </div>
     </div>
 
-    <div class="card c3" onclick="openModal('Management Message', 'Our mission is to build character, nurture talent, and empower young minds with values and innovation for a bright future.')">
-      <div class="card-icon">👔</div>
-      <div class="card-title">Management Message</div>
+    <div class="notice-board" id="noticeBoardBox">
+        <h4>📢 Principal Notice / Live Update:</h4>
+        <p id="liveNoticeText">Welcome to The Global Indian School Surat! Check daily updates here.</p>
     </div>
 
-    <div class="card c4" onclick="openDynamicModal('principal message', 'Principal Message', 'Dear Parents & Students,<br><br>We focus on value-based education, discipline, and practical learning to bring out the best in every student.')">
-      <div class="card-icon">💬</div>
-      <div class="card-title">Principal Message</div>
+    <div class="grid-container">
+        <a href="#" class="card" style="background:#ffe6e6;"><div class="card-icon">📅</div><div class="card-title">Todays</div></a>
+        <a href="#" class="card" style="background:#fff2e6;"><div class="card-icon">ℹ️</div><div class="card-title">About Us</div></a>
+        <a href="#" class="card" style="background:#e6ffe6;"><div class="card-icon">👔</div><div class="card-title">Management</div></a>
+        <a href="#" class="card" style="background:#e6f2ff;"><div class="card-icon">💬</div><div class="card-title">Principal</div></a>
+        <a href="#" class="card" style="background:#ffe6f2;"><div class="card-icon">🎯</div><div class="card-title">Activity</div></a>
+        <a href="#" class="card" style="background:#f2e6ff;"><div class="card-icon" onclick="openNoticeModal()">📋</div><div class="card-title">Notice</div></a>
+        <a href="#" class="card" style="background:#e6fff2;"><div class="card-icon">🏫</div><div class="card-title">Facility</div></a>
+        <a href="#" class="card" style="background:#ffffe6;"><div class="card-icon">🖼️</div><div class="card-title">Gallery</div></a>
+        <a href="#" class="card" style="background:#f2f2ff;"><div class="card-icon">🎓</div><div class="card-title">Students</div></a>
+        <a href="#" class="card" style="background:#ffe6f2;"><div class="card-icon">🎉</div><div class="card-title">Events</div></a>
+        <a href="#" class="card" style="background:#fffae6;"><div class="card-icon">📝</div><div class="card-title">Inquiry</div></a>
+        <a href="#" class="card" style="background:#e6fffa;"><div class="card-icon">📞</div><div class="card-title">Contact Us</div></a>
     </div>
 
-    <div class="card c5" onclick="openDynamicModal('activity', 'School Activities', '📌 Science Exhibition<br>📌 Annual Sports Week<br>📌 Cultural Programs & Competitions')">
-      <div class="card-icon">🎯</div>
-      <div class="card-title">Activity</div>
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <h3>🔐 Principal Admin Panel</h3>
+            <input type="password" id="adminPassInput" placeholder="Enter Password (Default: 1234)">
+            <textarea id="adminNoticeInput" rows="3" placeholder="Type new notice or message here..."></textarea>
+            <div class="modal-buttons">
+                <button class="btn-save" onclick="saveNotice()">Publish Live</button>
+                <button class="btn-close" onclick="closeAdminModal()">Close</button>
+            </div>
+        </div>
     </div>
 
-    <div class="card c6" onclick="openDynamicModal('notice', 'Notice Board', '📌 Upcoming terminal exams start next month.<br>📌 Parent-Teacher Meeting on Saturday.<br>📌 School fees due date: 10th of every month.')">
-      <div class="card-icon">📋</div>
-      <div class="card-title">Notice</div>
-    </div>
+    <script>
+        // Load saved notice on start
+        window.onload = function() {
+            let saved = localStorage.getItem("schoolAppNotice");
+            if(saved) {
+                document.getElementById("liveNoticeText").innerText = saved;
+            }
+        }
 
-    <div class="card c7" onclick="openModal('School Facilities', '✔ Digital Smart Classrooms<br>✔ Fully Equipped Science & Computer Labs<br>✔ Sports Complex & Playground<br>✔ Safe Bus Transport Facility')">
-      <div class="card-icon">🏫</div>
-      <div class="card-title">Facility</div>
-    </div>
+        function openAdminModal() {
+            document.getElementById("adminModal").style.display = "flex";
+        }
 
-    <div class="card c8" onclick="openModal('Photo Gallery', 'Campus photos, Sports Day highlights, and Annual Day events gallery will be updated here!')">
-      <div class="card-icon">🖼️</div>
-      <div class="card-title">Gallery</div>
-    </div>
+        function closeAdminModal() {
+            document.getElementById("adminModal").style.display = "none";
+        }
 
-    <div class="card c9" onclick="openModal('Student Zone', 'Access homework, exam timetable, syllabus, and study material directly from this section.')">
-      <div class="card-icon">🎓</div>
-      <div class="card-title">Student Zone</div>
-    </div>
+        function saveNotice() {
+            let pass = document.getElementById("adminPassInput").value;
+            let text = document.getElementById("adminNoticeInput").value;
 
-    <div class="card c1" onclick="openDynamicModal('events', 'Upcoming Events', '🎉 Annual Sports Meet - Coming Soon!<br>🎉 Science Fair 2026<br>🎉 Teachers\' Day Celebration')">
-      <div class="card-icon">🎉</div>
-      <div class="card-title">Events</div>
-    </div>
-
-    <div class="card c2" onclick="openDynamicModal('admission inquiry', 'Admission Inquiry', '<b>Admissions Open for New Academic Session!</b><br><br>Classes: Nursery to 12th<br>📞 Contact: +91 94275 80414<br>✉ Email: admission@gis.edu.in')">
-      <div class="card-icon">📝</div>
-      <div class="card-title">Admission Inquiry</div>
-    </div>
-
-    <div class="card c3" onclick="openModal('Contact Us', '<b>The Global Indian School</b><br>Surat, Gujarat, India<br><br>📞 Phone: +91 94275 80414<br>🌐 Web: sharitpandey57-coder.github.io')">
-      <div class="card-icon">📞</div>
-      <div class="card-title">Contact Us</div>
-    </div>
-
-  </div>
-
-  <div class="modal-overlay" id="customModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="modalTitle">Title</h3>
-        <button class="close-btn" onclick="closeModal()">✕</button>
-      </div>
-      <div class="modal-body" id="modalText">
-        Content...
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxNPGLhoMHp1ApbHec2CdZeYQ_v89beYEhjNuh26m7resg80PlWMCRIXwiwrJ1anzy4/exec";
-    let liveData = {};
-
-    function fetchSheetData() {
-      fetch(API_URL)
-        .then(res => res.json())
-        .then(data => {
-          liveData = data;
-          console.log("Sheet Data Loaded:", liveData);
-        })
-        .catch(err => console.error("Error fetching live data:", err));
-    }
-
-    function openModal(title, content) {
-      document.getElementById('modalTitle').innerText = title;
-      document.getElementById('modalText').innerHTML = content;
-      document.getElementById('customModal').style.display = 'flex';
-    }
-
-    function openDynamicModal(categoryKey, defaultTitle, defaultContent) {
-      let content = liveData[categoryKey] ? liveData[categoryKey].replace(/\n/g, "<br>") : defaultContent;
-      openModal(defaultTitle, content);
-    }
-
-    function closeModal() {
-      document.getElementById('customModal').style.display = 'none';
-    }
-
-    window.onload = fetchSheetData;
-  </script>
-
+            if(pass === "1234") { // Aap password baad me change kar sakte hain
+                if(text.trim() !== "") {
+                    localStorage.setItem("schoolAppNotice", text);
+                    document.getElementById("liveNoticeText").innerText = text;
+                    document.getElementById("adminNoticeInput").value = "";
+                    document.getElementById("adminPassInput").value = "";
+                    closeAdminModal();
+                    alert("Notice published live successfully!");
+                } else {
+                    alert("Please type a message first.");
+                }
+            } else {
+                alert("Incorrect Password!");
+            }
+        }
+    </script>
 </body>
 </html>
