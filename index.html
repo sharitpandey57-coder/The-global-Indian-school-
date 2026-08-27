@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +56,7 @@
       padding: 0 15px;
     }
 
-    /* Dashboard Cards with Different Light Colors */
+    /* Dashboard Cards */
     .card {
       border-radius: 15px;
       padding: 15px 10px;
@@ -69,6 +68,12 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.08);
       text-decoration: none;
       color: #333;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .card:active {
+      transform: scale(0.95);
     }
 
     .card-icon {
@@ -90,7 +95,7 @@
       line-height: 1.2;
     }
 
-    /* Light Theme Background Colors like Screenshot */
+    /* Light Theme Background Colors */
     .c1 { background-color: #ffe4e6; }
     .c2 { background-color: #ffedd5; }
     .c3 { background-color: #dcfce7; }
@@ -104,84 +109,86 @@
 </head>
 <body>
 
-  <!-- Header -->
   <div class="top-bar">
     <div>☰ THE GLOBAL INDIAN SCHOOL</div>
     <div>🔔 ⚙️</div>
   </div>
 
-  <!-- Banner Container -->
   <div class="banner-container">
     <div class="banner-card">
-      <!-- Aapki uploaded logo photo -->
       <img src="launchericon-512x512.png" alt="School Banner">
     </div>
   </div>
 
-  <!-- Dashboard 3x3 Grid -->
   <div class="grid-container">
 
-    <a href="#" class="card c1">
+    <div class="card c1" onclick="openSection('Today\'s Events & Schedule')">
       <div class="card-icon">📅</div>
       <div class="card-title">Todays</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c2">
+    <div class="card c2" onclick="openSection('About Our School')">
       <div class="card-icon">👤</div>
       <div class="card-title">About Us</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c3">
+    <div class="card c3" onclick="openSection('Management Message')">
       <div class="card-icon">👔</div>
       <div class="card-title">Management Message</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c4">
+    <div class="card c4" onclick="openSection('Principal Message')">
       <div class="card-icon">💬</div>
       <div class="card-title">Principal Message</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c5">
+    <div class="card c5" onclick="openSection('School Activities')">
       <div class="card-icon">🎯</div>
       <div class="card-title">Activity</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c6">
+    <div class="card c6" onclick="openSection('Notice Board')">
       <div class="card-icon">📋</div>
       <div class="card-title">Notice</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c7">
+    <div class="card c7" onclick="openSection('School Facilities')">
       <div class="card-icon">🏫</div>
       <div class="card-title">Facility</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c8">
+    <div class="card c8" onclick="openSection('Photo Gallery')">
       <div class="card-icon">🖼️</div>
       <div class="card-title">Gallery</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c9">
+    <div class="card c9" onclick="openSection('Student Zone Portal')">
       <div class="card-icon">🎓</div>
       <div class="card-title">Student Zone</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c1">
+    <div class="card c1" onclick="openSection('Upcoming Events')">
       <div class="card-icon">🎉</div>
       <div class="card-title">Events</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c2">
+    <div class="card c2" onclick="openSection('Admission Inquiry Form')">
       <div class="card-icon">📝</div>
       <div class="card-title">Admission Inquiry</div>
-    </a>
+    </div>
 
-    <a href="#" class="card c3">
+    <div class="card c3" onclick="openSection('Contact Us Details')">
       <div class="card-icon">📞</div>
       <div class="card-title">Contact Us</div>
-    </a>
+    </div>
 
   </div>
+
+  <script>
+    function openSection(title) {
+      alert("Welcome to " + title + "\n\nThis section is coming soon!");
+    }
+  </script>
 
 </body>
 </html>
