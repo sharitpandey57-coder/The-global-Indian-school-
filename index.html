@@ -51,17 +51,31 @@
             width: 100%;
             display: block;
         }
-        .notice-board {
+        .section-box {
             margin: 0 15px 15px 15px;
-            background: #fff3cd;
-            border: 1px solid #ffeeba;
+            background: white;
+            border-left: 5px solid #cc0000;
             padding: 12px;
             border-radius: 10px;
-            color: #856404;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        .notice-board h4 {
-            margin-bottom: 5px;
+        .section-box h4 {
+            margin-bottom: 8px;
             font-size: 14px;
+            color: #cc0000;
+        }
+        .section-box p {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .section-img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: none;
+            margin-top: 8px;
         }
         .grid-container {
             display: grid;
@@ -82,10 +96,6 @@
             text-decoration: none;
             color: #333;
             cursor: pointer;
-            transition: transform 0.1s;
-        }
-        .card:active {
-            transform: scale(0.95);
         }
         .card-icon {
             font-size: 28px;
@@ -96,7 +106,7 @@
             font-weight: bold;
         }
 
-        /* Modal / Popup Admin Panel */
+        /* Admin Modal */
         .modal {
             display: none;
             position: fixed;
@@ -113,23 +123,38 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
         }
         .modal-content h3 {
             color: #cc0000;
             margin-bottom: 12px;
             font-size: 16px;
         }
+        .modal-content label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-top: 8px;
+            margin-bottom: 3px;
+        }
         .modal-content input, .modal-content textarea {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 8px;
+            margin-bottom: 5px;
             border: 1px solid #ccc;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
+        }
+        .file-input {
+            background: #f9f9f9;
+            padding: 5px;
         }
         .modal-buttons {
             display: flex;
             justify-content: space-between;
+            margin-top: 15px;
         }
         .modal-buttons button {
             padding: 8px 15px;
@@ -155,70 +180,156 @@
         </div>
     </div>
 
-    <div class="notice-board" id="noticeBoardBox">
-        <h4>📢 Principal Notice / Live Update:</h4>
-        <p id="liveNoticeText">Welcome to The Global Indian School Surat! Check daily updates here.</p>
+    <!-- Notice Section -->
+    <div class="section-box" style="background: #fff3cd; border-left-color: #ffc107;">
+        <h4 style="color: #856404;">📢 Latest Notice:</h4>
+        <p id="displayNotice">Welcome to The Global Indian School Surat! Check daily updates here.</p>
     </div>
 
+    <!-- Events Section -->
+    <div class="section-box" style="background: #e6f2ff; border-left-color: #007bff;">
+        <h4 style="color: #004085;">🎉 Upcoming Events:</h4>
+        <p id="displayEvents">No upcoming events right now. Stay tuned!</p>
+        <img id="displayEventsImg" class="section-img" alt="Event Photo">
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="section-box" style="background: #e6fff2; border-left-color: #28a745;">
+        <h4 style="color: #155724;">🖼️ Gallery / Highlights:</h4>
+        <p id="displayGallery">School campus updates and photo highlights will appear here.</p>
+        <img id="displayGalleryImg" class="section-img" alt="Gallery Photo">
+    </div>
+
+    <!-- App Dashboard Grid -->
     <div class="grid-container">
-        <a href="#" class="card" style="background:#ffe6e6;"><div class="card-icon">📅</div><div class="card-title">Todays</div></a>
-        <a href="#" class="card" style="background:#fff2e6;"><div class="card-icon">ℹ️</div><div class="card-title">About Us</div></a>
-        <a href="#" class="card" style="background:#e6ffe6;"><div class="card-icon">👔</div><div class="card-title">Management</div></a>
-        <a href="#" class="card" style="background:#e6f2ff;"><div class="card-icon">💬</div><div class="card-title">Principal</div></a>
-        <a href="#" class="card" style="background:#ffe6f2;"><div class="card-icon">🎯</div><div class="card-title">Activity</div></a>
-        <a href="#" class="card" style="background:#f2e6ff;"><div class="card-icon" onclick="openNoticeModal()">📋</div><div class="card-title">Notice</div></a>
-        <a href="#" class="card" style="background:#e6fff2;"><div class="card-icon">🏫</div><div class="card-title">Facility</div></a>
-        <a href="#" class="card" style="background:#ffffe6;"><div class="card-icon">🖼️</div><div class="card-title">Gallery</div></a>
-        <a href="#" class="card" style="background:#f2f2ff;"><div class="card-icon">🎓</div><div class="card-title">Students</div></a>
-        <a href="#" class="card" style="background:#ffe6f2;"><div class="card-icon">🎉</div><div class="card-title">Events</div></a>
-        <a href="#" class="card" style="background:#fffae6;"><div class="card-icon">📝</div><div class="card-title">Inquiry</div></a>
-        <a href="#" class="card" style="background:#e6fffa;"><div class="card-icon">📞</div><div class="card-title">Contact Us</div></a>
+        <div class="card" style="background:#ffe6e6;"><div class="card-icon">📅</div><div class="card-title">Todays</div></div>
+        <div class="card" style="background:#fff2e6;"><div class="card-icon">ℹ️</div><div class="card-title">About Us</div></div>
+        <div class="card" style="background:#e6ffe6;"><div class="card-icon">👔</div><div class="card-title">Management</div></div>
+        <div class="card" style="background:#e6f2ff;"><div class="card-icon">💬</div><div class="card-title">Principal</div></div>
+        <div class="card" style="background:#ffe6f2;"><div class="card-icon">🎯</div><div class="card-title">Activity</div></div>
+        <div class="card" style="background:#f2e6ff;"><div class="card-icon">📋</div><div class="card-title">Notice</div></div>
+        <div class="card" style="background:#e6fff2;"><div class="card-icon">🏫</div><div class="card-title">Facility</div></div>
+        <div class="card" style="background:#ffffe6;"><div class="card-icon">🖼️</div><div class="card-title">Gallery</div></div>
+        <div class="card" style="background:#f2f2ff;"><div class="card-icon">🎓</div><div class="card-title">Students</div></div>
+        <div class="card" style="background:#ffe6f2;"><div class="card-icon">🎉</div><div class="card-title">Events</div></div>
+        <div class="card" style="background:#fffae6;"><div class="card-icon">📝</div><div class="card-title">Inquiry</div></div>
+        <div class="card" style="background:#e6fffa;"><div class="card-icon">📞</div><div class="card-title">Contact Us</div></div>
     </div>
 
+    <!-- Admin Modal Panel -->
     <div class="modal" id="adminModal">
         <div class="modal-content">
-            <h3>🔐 Principal Admin Panel</h3>
+            <h3>🔐 Principal Gallery & Event Upload</h3>
+            
+            <label>Admin Password:</label>
             <input type="password" id="adminPassInput" placeholder="Enter Password (Default: 1234)">
-            <textarea id="adminNoticeInput" rows="3" placeholder="Type new notice or message here..."></textarea>
+
+            <label>Update Notice Text:</label>
+            <textarea id="inputNotice" rows="2" placeholder="Write notice here..."></textarea>
+
+            <label>Update Event Details:</label>
+            <textarea id="inputEvents" rows="2" placeholder="Write event info..."></textarea>
+            <label>Select Event Photo from Gallery:</label>
+            <input type="file" id="inputEventsImgFile" class="file-input" accept="image/*">
+
+            <label>Update Gallery Details:</label>
+            <textarea id="inputGallery" rows="2" placeholder="Write gallery info..."></textarea>
+            <label>Select Gallery Photo from Device:</label>
+            <input type="file" id="inputGalleryImgFile" class="file-input" accept="image/*">
+
             <div class="modal-buttons">
-                <button class="btn-save" onclick="saveNotice()">Publish Live</button>
+                <button class="btn-save" onclick="saveAllUpdates()">Upload & Publish</button>
                 <button class="btn-close" onclick="closeAdminModal()">Close</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Load saved notice on start
+        // Load saved data on start
         window.onload = function() {
-            let saved = localStorage.getItem("schoolAppNotice");
-            if(saved) {
-                document.getElementById("liveNoticeText").innerText = saved;
+            if(localStorage.getItem("appNotice")) {
+                document.getElementById("displayNotice").innerText = localStorage.getItem("appNotice");
+            }
+            
+            if(localStorage.getItem("appEvents")) {
+                document.getElementById("displayEvents").innerText = localStorage.getItem("appEvents");
+            }
+            let eImg = localStorage.getItem("appEventsImg");
+            if(eImg) {
+                let imgEl = document.getElementById("displayEventsImg");
+                imgEl.src = eImg;
+                imgEl.style.display = "block";
+            }
+
+            if(localStorage.getItem("appGallery")) {
+                document.getElementById("displayGallery").innerText = localStorage.getItem("appGallery");
+            }
+            let gImg = localStorage.getItem("appGalleryImg");
+            if(gImg) {
+                let imgEl = document.getElementById("displayGalleryImg");
+                imgEl.src = gImg;
+                imgEl.style.display = "block";
             }
         }
 
         function openAdminModal() {
             document.getElementById("adminModal").style.display = "flex";
+            document.getElementById("inputNotice").value = document.getElementById("displayNotice").innerText;
+            document.getElementById("inputEvents").value = document.getElementById("displayEvents").innerText;
+            document.getElementById("inputGallery").value = document.getElementById("displayGallery").innerText;
         }
 
         function closeAdminModal() {
             document.getElementById("adminModal").style.display = "none";
         }
 
-        function saveNotice() {
+        function saveAllUpdates() {
             let pass = document.getElementById("adminPassInput").value;
-            let text = document.getElementById("adminNoticeInput").value;
 
-            if(pass === "1234") { // Aap password baad me change kar sakte hain
-                if(text.trim() !== "") {
-                    localStorage.setItem("schoolAppNotice", text);
-                    document.getElementById("liveNoticeText").innerText = text;
-                    document.getElementById("adminNoticeInput").value = "";
-                    document.getElementById("adminPassInput").value = "";
-                    closeAdminModal();
-                    alert("Notice published live successfully!");
-                } else {
-                    alert("Please type a message first.");
+            if(pass === "1234") {
+                let nText = document.getElementById("inputNotice").value;
+                let eText = document.getElementById("inputEvents").value;
+                let gText = document.getElementById("inputGallery").value;
+
+                localStorage.setItem("appNotice", nText);
+                localStorage.setItem("appEvents", eText);
+                localStorage.setItem("appGallery", gText);
+
+                document.getElementById("displayNotice").innerText = nText;
+                document.getElementById("displayEvents").innerText = eText;
+                document.getElementById("displayGallery").innerText = gText;
+
+                // Handle Event Photo Upload
+                let eventFile = document.getElementById("inputEventsImgFile").files[0];
+                if(eventFile) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        let base64Img = e.target.result;
+                        localStorage.setItem("appEventsImg", base64Img);
+                        let imgEl = document.getElementById("displayEventsImg");
+                        imgEl.src = base64Img;
+                        imgEl.style.display = "block";
+                    }
+                    reader.readAsDataURL(eventFile);
                 }
+
+                // Handle Gallery Photo Upload
+                let galleryFile = document.getElementById("inputGalleryImgFile").files[0];
+                if(galleryFile) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        let base64Img = e.target.result;
+                        localStorage.setItem("appGalleryImg", base64Img);
+                        let imgEl = document.getElementById("displayGalleryImg");
+                        imgEl.src = base64Img;
+                        imgEl.style.display = "block";
+                    }
+                    reader.readAsDataURL(galleryFile);
+                }
+
+                document.getElementById("adminPassInput").value = "";
+                closeAdminModal();
+                alert("Photo and details updated successfully!");
             } else {
                 alert("Incorrect Password!");
             }
